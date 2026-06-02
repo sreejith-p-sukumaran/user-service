@@ -1,17 +1,17 @@
 # User Service
 
-A backend microservice for **user management** — handling user creation, retrieval and lifecycle operations through a REST API. Built with Kotlin and Spring Boot.
+A backend microservice for **user management** — handling user creation, retrieval and lifecycle operations through a REST API. Built with Java and Spring Boot.
 
-> ⚠️ _This description is a starting point — adjust it to match exactly what the service does (e.g. authentication, profile management, role handling)._
+> ⚠️ _Adjust this description to match exactly what the service does (e.g. authentication, profile management, role handling)._
 
 ---
 
 ## Tech stack
 
-- **Language:** Kotlin
+- **Language:** Java
 - **Framework:** Spring Boot (Spring Web, Spring Data JPA)
-- **Build:** ⚠️ _(Gradle / Maven — set to match your project)_
-- **Persistence:** ⚠️ _(H2 / PostgreSQL / MySQL — set to match your config)_
+- **Build:** Maven
+- **Database:** MySQL
 - **Testing:** JUnit 5
 
 ---
@@ -32,7 +32,20 @@ A backend microservice for **user management** — handling user creation, retri
 ### Prerequisites
 
 - JDK 17+
-- ⚠️ Gradle or Maven
+- Maven (or use the included `./mvnw` wrapper)
+- A running MySQL instance
+
+### Configure the database
+
+Create a database and set the connection details in `src/main/resources/application.properties`
+(or `application.yml`). ⚠️ _Match these to your actual config._
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/userdb
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+spring.jpa.hibernate.ddl-auto=update
+```
 
 ### Run locally
 
@@ -40,10 +53,6 @@ A backend microservice for **user management** — handling user creation, retri
 git clone https://github.com/sreejith-p-sukumaran/user-service.git
 cd user-service
 
-# Gradle
-./gradlew bootRun
-
-# or Maven
 ./mvnw spring-boot:run
 ```
 
@@ -76,7 +85,7 @@ curl -X POST http://localhost:8080/users \
 ## Testing
 
 ```bash
-./gradlew test
+./mvnw test
 ```
 
 ---
@@ -86,8 +95,18 @@ curl -X POST http://localhost:8080/users \
 ```
 src/
 ├── main/
-│   ├── kotlin/        # controllers, services, repositories, domain
+│   ├── java/          # controllers, services, repositories, domain
 │   └── resources/     # application config
 └── test/
-    └── kotlin/        # tests
+    └── java/          # tests
 ```
+
+---
+
+## Build
+
+```bash
+./mvnw clean package
+```
+
+This produces a runnable JAR under `target/`.
